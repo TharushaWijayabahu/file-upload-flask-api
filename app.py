@@ -36,6 +36,11 @@ def upload_image():
 
         if request.files:
             image = request.files["image"]
+
+            if image.filename == "":
+                print("No filename")
+                return redirect(request.url)
+
             filename = secure_filename(image.filename)
 
             image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
