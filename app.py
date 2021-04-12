@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
@@ -35,8 +36,9 @@ def upload_image():
 
         if request.files:
             image = request.files["image"]
+            filename = secure_filename(image.filename)
 
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image))
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
 
             print(image)
 
