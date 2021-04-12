@@ -41,13 +41,18 @@ def upload_image():
                 print("No filename")
                 return redirect(request.url)
 
-            filename = secure_filename(image.filename)
+            if allowed_image(image.filename):
+                filename = secure_filename(image.filename)
 
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+                image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
 
-            print(image)
+                print("Image saved")
 
-            return redirect(request.url)
+                return redirect(request.url)
+
+            else:
+                print("That file extension is not allowed")
+                return redirect(request.url)
 
     return render_template("public/index.html")
 
