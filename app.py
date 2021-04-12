@@ -12,7 +12,7 @@ def hello_world():
 
 app.config["IMAGE_UPLOADS"] = "D:\\MY\\My_Projects\\video-upload-flask-app\\data"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
-app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024     # maximum filesize at around 50 megabytes
+app.config['MAX_IMAGE_FILESIZE'] = 0.5 * 1024 * 1024     # maximum filesize at around 50 megabytes
 
 
 def allowed_image(filename):
@@ -32,7 +32,6 @@ def allowed_image(filename):
 
 
 def allowed_image_filesize(filesize):
-
     if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
         return True
     else:
