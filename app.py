@@ -10,6 +10,7 @@ def hello_world():
 
 
 app.config["IMAGE_UPLOADS"] = "D:\\MY\\My_Projects\\video-upload-flask-app\\data"
+app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 
 
 @app.route("/upload-image", methods=["GET", "POST"])
