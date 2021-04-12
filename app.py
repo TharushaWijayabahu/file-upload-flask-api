@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
@@ -10,8 +10,17 @@ def hello_world():
 
 @app.route("/upload-image", methods=["GET", "POST"])
 def upload_image():
-    return render_template("public/upload_image.html")
+    if request.method == "POST":
+
+        if request.files:
+            image = request.files["image"]
+
+            print(image)
+
+            return redirect(request.url)
+
+    return render_template("public/index.html")
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=type)
