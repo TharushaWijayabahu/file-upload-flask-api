@@ -19,6 +19,8 @@ def upload_image():
         if request.files:
             image = request.files["image"]
 
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image))
+
             print(image)
 
             return redirect(request.url)
