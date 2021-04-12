@@ -31,6 +31,14 @@ def allowed_image(filename):
         return False
 
 
+def allowed_image_filesize(filesize):
+
+    if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
+        return True
+    else:
+        return False
+
+
 @app.route("/upload-image", methods=["GET", "POST"])
 def upload_image():
     if request.method == "POST":
