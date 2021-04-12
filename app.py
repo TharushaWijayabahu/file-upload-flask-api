@@ -44,24 +44,29 @@ def upload_image():
     if request.method == "POST":
 
         if request.files:
-            image = request.files["image"]
+            if "filesize" in request.cookies:
+                if not allowed_image_filesize(request.cookies["filesize"]):
+                    print("Filesize exceeded maximum limit")
+                    return redirect(request.url)
 
-            if image.filename == "":
-                print("No filename")
-                return redirect(request.url)
+                image = request.files["image"]
 
-            if allowed_image(image.filename):
-                filename = secure_filename(image.filename)
+                if image.filename == "":
+                    print("No filename")
+                    return redirect(request.url)
 
-                image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+                if allowed_image(image.filename):
+                    filename = secure_filename(image.filename)
 
-                print("Image saved")
+                    image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
 
-                return redirect(request.url)
+                    print("Image saved")
 
-            else:
-                print("That file extension is not allowed")
-                return redirect(request.url)
+                    return redirect(request.url)
+
+                else:
+                    print("That file extension is not allowed")
+                    return redirect(request.url)
 
     return render_template("public/index.html")
 
