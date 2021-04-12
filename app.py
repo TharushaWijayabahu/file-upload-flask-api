@@ -10,7 +10,7 @@ def hello_world():
     return render_template("public/index.html")
 
 
-app.config["IMAGE_UPLOADS"] = "D:\\MY\\My_Projects\\video-upload-flask-app\\data"
+app.config["IMAGE_UPLOADS"] = "path-to-directory"   # Add full path to your directory
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 app.config['MAX_IMAGE_FILESIZE'] = 0.5 * 1024 * 1024     # maximum filesize at around 50 megabytes
 
